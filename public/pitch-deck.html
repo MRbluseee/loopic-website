@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop - Pitch Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+        
+        .header .tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+        
+        .section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .problem, .solution {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .solution {
+            border-left-color: #38a169;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .timeline {
+            margin-top: 30px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+        
+        .timeline-date {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-right: 20px;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .team-card {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #667eea;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .demo-download-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .video-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .download-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .download-btn img {
+            height: 50px;
+            max-width: 180px;
+            object-fit: contain;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .team-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #f8fafc;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .chart-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .chart-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .chart-label {
+            font-size: 1.1rem;
+            color: #4a5568;
+            font-weight: 600;
+        }
+        
+        .chart-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-download-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:20px;">
+                <img src="123.png" alt="Loop Logo" style="width:80px;height:80px;border-radius:16px;object-fit:cover;" />
+                <h1>LOOP</h1>
+            </div>
+            <p class="tagline">Local Photo-Sharing Platform</p>
+            <p style="margin-top: 20px; font-size: 1.1rem; opacity: 0.8;">
+                Discover trending moments around you (1-10km radius)
+            </p>
+        </div>
+
+        <!-- Product Demo & Download -->
+        <div class="section">
+            <h2>Product Demo & Download</h2>
+            <div class="demo-download-grid">
+                <div class="video-container">
+                    <div style="max-width: 350px; position: relative; width: 100%;">
+                        <div style="position: relative; width: 100%; padding-bottom: 177.78%; /* 9:16 aspect ratio for portrait */">
+                            <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); object-fit: cover;">
+                                <source src="video.MP4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <p style="margin-top: 20px; color: #666; font-style: italic; text-align: center;">
+                            Watch how Loop helps you discover amazing places within 10km radius
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="download-container">
+                    <h3 style="margin-bottom: 10px; color: #2d3748; font-size: 1.8rem;">Download Loop App</h3>
+                    <p style="color: #666; margin-bottom: 30px;">Get the app and start discovering amazing places around you</p>
+                    
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/vn/app/loopic/id6747373355" target="_blank" class="download-btn">
+                            <img src="apple store.png" alt="Download on App Store" />
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=io.getloop.app" target="_blank" class="download-btn">
+                            <img src="gg play.png" alt="Download on Google Play" />
+                        </a>
+                    </div>
+                    
+                    <p style="margin-top: 25px; color: #888; font-size: 0.95rem;">
+                        Available on iOS and Android devices
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem & Solution -->
+        <div class="section">
+            <h2>Problem & Solution</h2>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>🚨 The Problem</h3>
+                    <p>When visiting new cities, people struggle to find authentic local experiences, great restaurants, and trending places. Traditional apps show generic information, not real user experiences.</p>
+                </div>
+                <div class="solution">
+                    <h3>✅ Our Solution</h3>
+                    <p>Loop connects users through location-based photo sharing, helping discover real experiences from local community members within 1-10km radius.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="section">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Location-Based Discovery</h3>
+                    <p>View real photos within 1-50km radius from your current location</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Category Filtering</h3>
+                    <p>Find exactly what you're looking for: food, fashion, events, services</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Community Connection</h3>
+                    <p>Connect with local users who share similar interests</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Experience Sharing</h3>
+                    <p>Post photos of your favorite places and discoveries</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Digital Currency Exchange</h3>
+                    <p>Trade digital currencies within your local community</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Web3 Platform</h3>
+                    <p>Future-ready blockchain integration for decentralized commerce</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Analytics -->
+        <div class="section">
+            <h2>Market Analytics & Growth</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-number">$2.5B</div>
+                    <div class="chart-label">Local Discovery Market</div>
+                    <div class="chart-description">Growing 15% annually</div>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-number">$180B</div>
+                    <div class="chart-label">Local Commerce Market</div>
+                    <div class="chart-description">Digital transformation driving growth</div>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-number">$1.2T</div>
+                    <div class="chart-label">Web3 Market Cap</div>
+                    <div class="chart-description">Blockchain adoption accelerating</div>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-number">75%</div>
+                    <div class="chart-label">Users Want Local Content</div>
+                    <div class="chart-description">Authentic experiences preferred</div>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-number">4.2B</div>
+                    <div class="chart-label">Smartphone Users</div>
+                    <div class="chart-description">Global mobile penetration</div>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-number">$3.2T</div>
+                    <div class="chart-label">Digital Payment Market</div>
+                    <div class="chart-description">Cryptocurrency adoption rising</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web3 Vision -->
+        <div class="section">
+            <h2>Web3 Vision & Digital Economy</h2>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>🚀 Web3 Integration</h3>
+                    <p>Loop is evolving into a comprehensive Web3 platform, enabling digital currency exchange and decentralized commerce within local communities.</p>
+                    <ul style="margin-top: 15px; margin-left: 20px;">
+                        <li>Local cryptocurrency trading</li>
+                        <li>NFT marketplace for local businesses</li>
+                        <li>DeFi lending for small businesses</li>
+                        <li>DAO governance for communities</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h3>💎 Digital Currency Exchange</h3>
+                    <p>Users can trade digital currencies, making Loop a hub for local digital economy and financial inclusion.</p>
+                    <ul style="margin-top: 15px; margin-left: 20px;">
+                        <li>Peer-to-peer crypto trading</li>
+                        <li>Local business crypto payments</li>
+                        <li>Staking rewards for community</li>
+                        <li>Cross-border remittances</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Opportunity -->
+        <div class="section">
+            <h2>Market Opportunity</h2>
+            <div class="market-stats">
+                <div class="stat-card">
+                    <div class="stat-number">$2.5B</div>
+                    <div class="stat-label">Local Discovery Market</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4.2B</div>
+                    <div class="stat-label">Smartphone Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">75%</div>
+                    <div class="stat-label">Users Want Local Content</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$180B</div>
+                    <div class="stat-label">Local Commerce Market</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Model -->
+        <div class="section">
+            <h2>Business Model</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>💰 Revenue Streams</h3>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li>Local business advertising</li>
+                        <li>Premium features for users</li>
+                        <li>Event promotion partnerships</li>
+                        <li>Data insights for businesses</li>
+                        <li>Cryptocurrency trading fees</li>
+                        <li>NFT marketplace commissions</li>
+                        <li>DeFi protocol integrations</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Target Users</h3>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li>Young professionals (18-35)</li>
+                        <li>Travelers & tourists</li>
+                        <li>Local business owners</li>
+                        <li>Event organizers</li>
+                        <li>Crypto enthusiasts</li>
+                        <li>Web3 developers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap -->
+        <div class="section">
+            <h2>Product Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Q1 2024</div>
+                    <div>
+                        <h3>MVP Launch</h3>
+                        <p>Core photo-sharing and location discovery features</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q2 2024</div>
+                    <div>
+                        <h3>Community Features</h3>
+                        <p>User profiles, following, and social interactions</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q3 2024</div>
+                    <div>
+                        <h3>Business Integration</h3>
+                        <p>Local business partnerships and advertising platform</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q4 2024</div>
+                    <div>
+                        <h3>E-commerce Features</h3>
+                        <p>Local marketplace and transaction capabilities</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q1 2025</div>
+                    <div>
+                        <h3>Digital Currency Exchange</h3>
+                        <p>Cryptocurrency trading and digital payments</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q2 2025</div>
+                    <div>
+                        <h3>Web3 Platform</h3>
+                        <p>NFT marketplace and DeFi integrations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team -->
+        <div class="section">
+            <h2>Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="IMG_3226.JPG" alt="Đào An Khang" class="team-avatar" />
+                    <h3>ĐÀO AN KHANG</h3>
+                    <p>Founder & CEO</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        5+ years experience in automation engineering and 2 years in project management
+                    </p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        <strong>Contact:</strong> ankhang9865@gmail.com<br>
+                        <strong>Phone:</strong> +84395814095<br>
+                        <strong>Location:</strong> Vietnam<br>
+                        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bluee-mr-924083339/" target="_blank" style="color: #667eea;">bluee-mr</a>
+                    </p>
+                </div>
+                <div class="team-card">
+                    <img src="IMG_3276.JPG" alt="Nguyễn Lê Thủy Phương" class="team-avatar" />
+                    <h3>NGUYỄN LÊ THỦY PHƯƠNG</h3>
+                    <p>Co-Founder & Community Lead</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        Community specialist with expertise in user engagement and local market development
+                    </p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        <strong>Education:</strong> Hanoi Law University<br>
+                        <strong>Expertise:</strong> Community Management<br>
+                        <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/kimmienguyenle/" target="_blank" style="color: #667eea;">kimmienguyenle</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Startup Details -->
+        <div class="section">
+            <h2>Startup Details</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🏢 Company Info</h3>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li><strong>Startup Name:</strong> Loop</li>
+                        <li><strong>Legal Entity:</strong> Loop App</li>
+                        <li><strong>Country:</strong> Vietnam</li>
+                        <li><strong>Website:</strong> loop-6b1e7.web.app</li>
+                        <li><strong>Pitch Deck:</strong> Available</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Business Model</h3>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li><strong>Model:</strong> B2C (Business to Consumer)</li>
+                        <li><strong>Industry:</strong> Retail and E-commerce</li>
+                        <li><strong>Target Countries:</strong> Vietnam, Indonesia</li>
+                        <li><strong>Revenue:</strong> Local advertising, Premium features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem & Solution Details -->
+        <div class="section">
+            <h2>Problem & Solution Details</h2>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>🚨 The Problem</h3>
+                    <p>When visiting new cities, people struggle to find authentic local experiences, great restaurants, and trending places. Traditional apps show generic information, not real user experiences.</p>
+                    <p style="margin-top: 15px; font-weight: 600;">Pain Points:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Generic, non-authentic information</li>
+                        <li>No real user experiences shared</li>
+                        <li>Difficult to discover local trends</li>
+                        <li>Lack of community connection</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h3>✅ Our Solution</h3>
+                    <p>Loop connects users through location-based photo sharing, helping discover real experiences from local community members within 1-10km radius.</p>
+                    <p style="margin-top: 15px; font-weight: 600;">Differentiating Factors:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Real photos from actual users</li>
+                        <li>Location-based discovery (1-10km)</li>
+                        <li>Community-driven content</li>
+                        <li>Category filtering system</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta">
+            <h2>Join the Loop Community</h2>
+            <p>Be part of the local discovery revolution</p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                <a href="https://apps.apple.com/vn/app/loopic/id6747373355" target="_blank" class="cta-button" style="background: white; color: #667eea;">
+                    📱 iOS App Store
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=io.getloop.app" target="_blank" class="cta-button" style="background: white; color: #667eea;">
+                    🤖 Google Play
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

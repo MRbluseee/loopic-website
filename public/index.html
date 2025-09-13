@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop - Chia sẻ ảnh theo vị trí</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Montserrat', Arial, sans-serif;
+        background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .container {
+        margin-top: 48px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        padding: 32px 24px 24px 24px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+      .logo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 16px;
+        border-radius: 18px;
+        object-fit: cover;
+        background: #e0e7ff;
+        display: inline-block;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+      }
+      h1 {
+        font-size: 2.1rem;
+        margin: 0 0 8px 0;
+        color: #3b3b3b;
+        letter-spacing: 2px;
+      }
+      .slogan {
+        color: #6366f1;
+        font-weight: 700;
+        margin-bottom: 16px;
+        font-size: 1.1rem;
+      }
+      .desc {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 8px;
+      }
+      .link-btn {
+        background: #6366f1;
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 0;
+        font-size: 1.05rem;
+        text-decoration: none;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+      }
+      .link-btn:hover {
+        background: #4f46e5;
+      }
+      .footer {
+        margin-top: 32px;
+        color: #888;
+        font-size: 0.95rem;
+        text-align: center;
+      }
+      @media (max-width: 500px) {
+        .container {
+          margin-top: 16px;
+          padding: 18px 6px 16px 6px;
+        }
+        h1 { font-size: 1.3rem; }
+        .logo { width: 60px; height: 60px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="123.png" alt="Loop Banner" style="width:100%;max-width:100%;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,0.07);object-fit:cover;margin-bottom:18px;" />
+      <div class="slogan">Share moments, connect the community!</div>
+      <div class="desc">
+        Loop is a local photo-sharing platform that helps you discover trending moments around you (1-10km radius).<br><br>
+        <b>📸 Share photos</b> | <b>🔍 Discover trends</b> | <b>💬 Connect with locals</b> | <b>🛍️ Grow your business</b>
+      </div>
+      <div style="text-align:center;font-size:2em;font-weight:900;margin:18px 0 0 0;letter-spacing:1px;">DOWNLOAD THE APP</div>
+      <div style="text-align:center;font-size:2.2em;line-height:1;margin-bottom:8px;">⬇️⬇️⬇️</div>
+      <div style="display:flex;justify-content:center;gap:18px;margin-bottom:18px;">
+        <a href="https://apps.apple.com/vn/app/loopic/id6747373355" target="_blank" style="display:inline-block;">
+          <img src="apple store.png" alt="App Store" style="height:64px;max-width:220px;object-fit:contain;display:block;" />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=io.getloop.app" target="_blank" style="display:inline-block;">
+          <img src="gg play.png" alt="Google Play" style="height:64px;max-width:220px;object-fit:contain;display:block;opacity:1;cursor:pointer;" />
+        </a>
+      </div>
+      <div style="font-weight:800;font-size:1.25em;text-align:center;margin-bottom:0px;letter-spacing:0.5px;">Join the community at:</div>
+      <div style="text-align:center;font-size:2.2em;line-height:1;margin-bottom:10px;">⬇️⬇️⬇️</div>
+      <div class="links">
+        <a class="link-btn" href="https://t.me/loopic0" target="_blank"><img src="telegram.png" alt="Telegram" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">Telegram Channel</a>
+        <a class="link-btn" href="https://t.me/+FeNm8-lZSa0wZDU9" target="_blank"><img src="telegram.png" alt="Telegram" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">Telegram Group</a>
+        <a class="link-btn" href="https://www.instagram.com/loopic0?igsh=ajJmaW1wOG5yNTJl&utm_source=qr" target="_blank"><img src="instagram.png" alt="Instagram" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">Instagram</a>
+        <a class="link-btn" href="https://chat.whatsapp.com/GJxxGQpJbLq8rsgabgzuT5" target="_blank"><img src="whatsapp.png" alt="WhatsApp" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">WhatsApp</a>
+        <a class="link-btn" href="https://www.facebook.com/share/1CSmsRZCSZ/?mibextid=wwXIfr" target="_blank"><img src="facebook.png" alt="Facebook" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">Facebook</a>
+        <a class="link-btn" href="https://x.com/loop9596?s=21" target="_blank"><img src="x.png" alt="X" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">X (Twitter)</a>
+        <a class="link-btn" href="https://youtube.com/@loopic9?si=W4-8BYu4eFW7Rvn7" target="_blank"><img src="youtube.png" alt="YouTube" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">YouTube</a>
+      </div>
+    </div>
+    <div class="footer">
+      © 2024 Loop. Made with ❤️ for the local community.<br>
+      <small>Visit us at: <a href="https://loopic.net" target="_blank" style="color: #6366f1;">loopic.net</a></small>
+    </div>
+  </body>
+</html>
