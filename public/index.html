@@ -168,22 +168,10 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 55% at 70% 35%, rgba(214, 184, 117, 0.22), transparent 58%),
-        linear-gradient(160deg, #2f4a3d 0%, var(--forest) 48%, #1a2c24 100%);
+        linear-gradient(180deg, rgba(36, 61, 50, 0.28) 0%, rgba(36, 61, 50, 0.52) 42%, rgba(36, 61, 50, 0.9) 100%),
+        url("/loop-hero.jpg") center/cover no-repeat;
       transform: scale(1.04);
       will-change: transform;
-    }
-    .hero-bg::after {
-      content: "";
-      position: absolute;
-      right: max(4%, calc(50% - 480px));
-      top: 12%;
-      width: min(42vw, 360px);
-      height: min(42vw, 360px);
-      background: url("/loop-logo.png") center/contain no-repeat;
-      opacity: 0.1;
-      filter: brightness(0) invert(1);
-      pointer-events: none;
     }
     .hero-content {
       position: relative;
@@ -340,13 +328,28 @@
       color: var(--terracotta);
       margin-bottom: 10px;
     }
-    .tile-nearby { background: var(--sage); }
+    .tile-nearby {
+      background:
+        linear-gradient(160deg, rgba(220, 227, 216, 0.92), rgba(245, 241, 232, 0.95)),
+        url("/loop-moments.jpg") center/cover no-repeat;
+    }
     .tile-world {
-      background: var(--forest);
+      background:
+        linear-gradient(160deg, rgba(36, 61, 50, 0.82), rgba(36, 61, 50, 0.92)),
+        url("/loop-places.jpg") center/cover no-repeat;
       color: var(--ivory);
     }
     .tile-world h3, .tile-world p { color: var(--ivory); }
     .tile-world .tile-meta { color: var(--sand); }
+    .tile-world .tile-cta {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--sand);
+    }
 
     /* Story grid */
     .story-grid {
@@ -366,45 +369,10 @@
     }
     .story-card .pic {
       height: 160px;
-      background-size: 42%;
+      background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-image: url("/loop-logo.png");
-      background-color: var(--ivory);
-    }
-    .story-card .pic.tone-forest {
-      background-color: var(--forest);
-      filter: none;
-      background-image: none;
-      position: relative;
-    }
-    .story-card .pic.tone-forest::after,
-    .story-card .pic.tone-sand::after,
-    .story-card .pic.tone-terra::after {
-      content: "";
-      position: absolute;
-      inset: 28%;
-      background: url("/loop-logo.png") center/contain no-repeat;
-      filter: brightness(0) invert(1);
-      opacity: 0.55;
-    }
-    .story-card .pic.tone-sand {
-      background-color: var(--sand);
-      background-image: none;
-      position: relative;
-    }
-    .story-card .pic.tone-sand::after {
-      filter: none;
-      opacity: 0.35;
-    }
-    .story-card .pic.tone-terra {
-      background-color: var(--terracotta);
-      background-image: none;
-      position: relative;
-    }
-    .story-card .pic.tone-sage {
-      background-color: #cfd8c9;
-      background-size: 38%;
+      background-color: var(--sage);
     }
     .story-card .body {
       padding: 18px;
@@ -518,26 +486,14 @@
     /* Download */
     .download {
       background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(214, 184, 117, 0.18), transparent 55%),
-        linear-gradient(145deg, #2f4a3d, var(--forest) 55%, #1a2c24);
+        linear-gradient(145deg, rgba(36, 61, 50, 0.82), rgba(36, 61, 50, 0.88)),
+        url("/loop-download.jpg") center/cover no-repeat;
       color: var(--ivory);
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .download::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: min(70vw, 420px);
-      height: min(70vw, 420px);
-      transform: translate(-50%, -50%);
-      background: url("/loop-logo.png") center/contain no-repeat;
-      opacity: 0.07;
-      filter: brightness(0) invert(1);
-      pointer-events: none;
-    }
+    .download .wrap { position: relative; z-index: 1; }
     .download h2 {
       color: var(--ivory);
       max-width: none;
@@ -662,13 +618,14 @@
       <button class="menu-toggle" id="menuBtn" type="button" aria-label="Menu">Menu</button>
       <ul class="nav-links">
         <li><a href="#discover">Discover</a></li>
+        <li><a href="/world.html">Worldwide</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#community">Community</a></li>
         <li><a href="#story">Our Story</a></li>
         <li><a href="#safety">Safety</a></li>
       </ul>
       <div class="nav-right">
-        <a class="lang" href="#download">EN</a>
+        <a class="lang" href="/world.html">Map</a>
         <a class="btn btn-primary" href="#download">Get the App</a>
       </div>
     </div>
@@ -689,7 +646,7 @@
       <p class="hero-sub">Discover real people, local stories and moments happening around you.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#download">Download App</a>
-        <a class="btn btn-ghost" href="#discover">Explore LOOP</a>
+        <a class="btn btn-ghost" href="/world.html">Worldwide map</a>
       </div>
     </div>
   </section>
@@ -717,8 +674,9 @@
         </div>
         <a class="tile tile-world" href="/world.html">
           <div class="tile-meta">Worldwide</div>
-          <h3>Explore</h3>
-          <p>See where LOOP is growing — a live map of places with photos.</p>
+          <h3>Explore the live map</h3>
+          <p>See where LOOP photos are growing around the world.</p>
+          <span class="tile-cta">Open Worldwide →</span>
         </a>
       </div>
     </div>
@@ -733,28 +691,28 @@
       </div>
       <div class="story-grid">
         <article class="story-card reveal">
-          <div class="pic tone-sage" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('/loop-moments.jpg')" aria-hidden="true"></div>
           <div class="body">
             <h3>Moments</h3>
             <p>Everyday scenes that feel alive when shared nearby.</p>
           </div>
         </article>
         <article class="story-card reveal">
-          <div class="pic tone-forest" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('/loop-places.jpg')" aria-hidden="true"></div>
           <div class="body">
             <h3>Places</h3>
             <p>Cafés, streets, corners — mapped by people who were there.</p>
           </div>
         </article>
         <article class="story-card reveal">
-          <div class="pic tone-sand" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('/loop-community.jpg')" aria-hidden="true"></div>
           <div class="body">
             <h3>Community</h3>
             <p>Neighbors and travelers meeting through local stories.</p>
           </div>
         </article>
         <article class="story-card reveal">
-          <div class="pic tone-terra" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('/loop-download.jpg')" aria-hidden="true"></div>
           <div class="body">
             <h3>Updates</h3>
             <p>What's happening around you, right now.</p>

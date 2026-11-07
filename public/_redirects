@@ -1,5 +1,15 @@
 # Cloudflare Pages redirects
-/*    /index.html   200
-
-# App-ads.txt should be served as text/plain
+/world    /world.html   200
 /app-ads.txt    /app-ads.txt   200
+
+
+
+
+
+
+
+
+
+
+
+
