@@ -168,10 +168,22 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(36, 61, 50, 0.35) 0%, rgba(36, 61, 50, 0.55) 45%, rgba(36, 61, 50, 0.88) 100%),
-        url("IMG_3226.JPG") center/cover no-repeat;
+        radial-gradient(ellipse 70% 55% at 70% 35%, rgba(214, 184, 117, 0.22), transparent 58%),
+        linear-gradient(160deg, #2f4a3d 0%, var(--forest) 48%, #1a2c24 100%);
       transform: scale(1.04);
       will-change: transform;
+    }
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      right: max(4%, calc(50% - 480px));
+      top: 12%;
+      width: min(42vw, 360px);
+      height: min(42vw, 360px);
+      background: url("/loop-logo.png") center/contain no-repeat;
+      opacity: 0.1;
+      filter: brightness(0) invert(1);
+      pointer-events: none;
     }
     .hero-content {
       position: relative;
@@ -354,8 +366,45 @@
     }
     .story-card .pic {
       height: 160px;
-      background-size: cover;
+      background-size: 42%;
       background-position: center;
+      background-repeat: no-repeat;
+      background-image: url("/loop-logo.png");
+      background-color: var(--ivory);
+    }
+    .story-card .pic.tone-forest {
+      background-color: var(--forest);
+      filter: none;
+      background-image: none;
+      position: relative;
+    }
+    .story-card .pic.tone-forest::after,
+    .story-card .pic.tone-sand::after,
+    .story-card .pic.tone-terra::after {
+      content: "";
+      position: absolute;
+      inset: 28%;
+      background: url("/loop-logo.png") center/contain no-repeat;
+      filter: brightness(0) invert(1);
+      opacity: 0.55;
+    }
+    .story-card .pic.tone-sand {
+      background-color: var(--sand);
+      background-image: none;
+      position: relative;
+    }
+    .story-card .pic.tone-sand::after {
+      filter: none;
+      opacity: 0.35;
+    }
+    .story-card .pic.tone-terra {
+      background-color: var(--terracotta);
+      background-image: none;
+      position: relative;
+    }
+    .story-card .pic.tone-sage {
+      background-color: #cfd8c9;
+      background-size: 38%;
     }
     .story-card .body {
       padding: 18px;
@@ -469,10 +518,25 @@
     /* Download */
     .download {
       background:
-        linear-gradient(135deg, rgba(36, 61, 50, 0.88), rgba(36, 61, 50, 0.72)),
-        url("IMG_3276.JPG") center/cover no-repeat;
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(214, 184, 117, 0.18), transparent 55%),
+        linear-gradient(145deg, #2f4a3d, var(--forest) 55%, #1a2c24);
       color: var(--ivory);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .download::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(70vw, 420px);
+      height: min(70vw, 420px);
+      transform: translate(-50%, -50%);
+      background: url("/loop-logo.png") center/contain no-repeat;
+      opacity: 0.07;
+      filter: brightness(0) invert(1);
+      pointer-events: none;
     }
     .download h2 {
       color: var(--ivory);
@@ -532,18 +596,15 @@
       gap: 10px;
     }
     .socials a {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: rgba(245, 241, 232, 0.12);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ivory);
+      border: 1px solid rgba(245, 241, 232, 0.25);
+      border-radius: 999px;
+      padding: 8px 12px;
     }
-    .socials a img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.9;
-    }
+    .socials a:hover { background: rgba(245, 241, 232, 0.1); }
     .copy {
       border-top: 1px solid rgba(245, 241, 232, 0.12);
       padding-top: 18px;
@@ -672,28 +733,28 @@
       </div>
       <div class="story-grid">
         <article class="story-card reveal">
-          <div class="pic" style="background-image:url('IMG_3226.JPG')"></div>
+          <div class="pic tone-sage" aria-hidden="true"></div>
           <div class="body">
             <h3>Moments</h3>
             <p>Everyday scenes that feel alive when shared nearby.</p>
           </div>
         </article>
         <article class="story-card reveal">
-          <div class="pic" style="background-image:url('IMG_3276.JPG')"></div>
+          <div class="pic tone-forest" aria-hidden="true"></div>
           <div class="body">
             <h3>Places</h3>
             <p>Cafés, streets, corners — mapped by people who were there.</p>
           </div>
         </article>
         <article class="story-card reveal">
-          <div class="pic" style="background-image:url('123.png');background-size:contain;background-repeat:no-repeat;background-color:#fff"></div>
+          <div class="pic tone-sand" aria-hidden="true"></div>
           <div class="body">
             <h3>Community</h3>
             <p>Neighbors and travelers meeting through local stories.</p>
           </div>
         </article>
         <article class="story-card reveal">
-          <div class="pic" style="background-image:linear-gradient(135deg,#243D32,#C66B45)"></div>
+          <div class="pic tone-terra" aria-hidden="true"></div>
           <div class="body">
             <h3>Updates</h3>
             <p>What's happening around you, right now.</p>
@@ -783,12 +844,8 @@
       <h2>Your world is waiting.</h2>
       <p class="lead">Start with your LOOP. Discover what's happening around you.</p>
       <div class="store-row">
-        <a href="https://apps.apple.com/vn/app/loopic/id6747373355" target="_blank" rel="noopener">
-          <img src="apple store.png" alt="Download on the App Store" />
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=io.getloop.app" target="_blank" rel="noopener">
-          <img src="gg play.png" alt="Get it on Google Play" />
-        </a>
+        <a class="btn btn-primary" href="https://apps.apple.com/vn/app/loopic/id6747373355" target="_blank" rel="noopener">App Store</a>
+        <a class="btn btn-ghost" href="https://play.google.com/store/apps/details?id=io.getloop.app" target="_blank" rel="noopener">Google Play</a>
       </div>
     </div>
   </section>
@@ -810,11 +867,11 @@
           <a href="#download">Terms</a>
         </div>
         <div class="socials">
-          <a href="https://t.me/loopic0" target="_blank" rel="noopener" aria-label="Telegram"><img src="telegram.png" alt="" /></a>
-          <a href="https://www.instagram.com/loopic0" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram.png" alt="" /></a>
-          <a href="https://www.facebook.com/share/1CSmsRZCSZ/" target="_blank" rel="noopener" aria-label="Facebook"><img src="facebook.png" alt="" /></a>
-          <a href="https://x.com/loop9596" target="_blank" rel="noopener" aria-label="X"><img src="x.png" alt="" /></a>
-          <a href="https://youtube.com/@loopic9" target="_blank" rel="noopener" aria-label="YouTube"><img src="youtube.png" alt="" /></a>
+          <a href="https://t.me/loopic0" target="_blank" rel="noopener">Telegram</a>
+          <a href="https://www.instagram.com/loopic0" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/share/1CSmsRZCSZ/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://x.com/loop9596" target="_blank" rel="noopener">X</a>
+          <a href="https://youtube.com/@loopic9" target="_blank" rel="noopener">YouTube</a>
         </div>
       </div>
       <div class="copy">© 2026 LOOP. Made for local life.</div>
