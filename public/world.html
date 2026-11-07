@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LOOP — Growing worldwide</title>
-  <meta name="description" content="See where LOOP photos are shared. Everything you need. In your loop." />
+  <title>LOOP — World map</title>
+  <meta name="description" content="See where LOOP photos are shared worldwide." />
+  <link rel="icon" href="/loop-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
   <style>
     :root {
-      --ink: #0a0a0a;
-      --paper: #ffffff;
-      --muted: #6b6b6b;
-      --line: #e6e6e6;
+      --ivory: #F5F1E8;
+      --forest: #243D32;
+      --terracotta: #C66B45;
+      --sand: #D6B875;
+      --sage: #DCE3D8;
+      --charcoal: #292B27;
+      --muted: #5c635c;
     }
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
       height: 100%;
-      font-family: Outfit, system-ui, sans-serif;
-      background: var(--paper);
-      color: var(--ink);
+      font-family: Manrope, system-ui, sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
     }
     #map {
       position: fixed;
@@ -35,7 +39,7 @@
       z-index: 1;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.28) 26%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0.55) 100%);
+        linear-gradient(180deg, rgba(245,241,232,0.92) 0%, rgba(245,241,232,0.28) 28%, rgba(245,241,232,0.08) 55%, rgba(245,241,232,0.55) 100%);
     }
     .ui {
       position: relative;
@@ -65,26 +69,31 @@
       gap: 6px;
     }
     .brand img {
-      height: 40px;
+      height: 36px;
       width: auto;
       display: block;
+      filter: brightness(0) saturate(100%) invert(18%) sepia(18%) saturate(900%) hue-rotate(100deg) brightness(0.85);
     }
     .tagline {
       font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      font-weight: 600;
+      letter-spacing: 0.12em;
+      font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
     }
     .home {
       text-decoration: none;
-      color: var(--ink);
-      border: 1.5px solid var(--ink);
+      color: var(--forest);
+      border: 1.5px solid var(--forest);
       border-radius: 999px;
       padding: 9px 16px;
       font-size: 0.85rem;
-      font-weight: 600;
-      background: rgba(255,255,255,0.88);
+      font-weight: 700;
+      background: rgba(245, 241, 232, 0.9);
+    }
+    .home:hover {
+      background: var(--forest);
+      color: var(--ivory);
     }
     .stats {
       pointer-events: auto;
@@ -97,8 +106,8 @@
     }
     .stat {
       position: relative;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--line);
+      background: rgba(245, 241, 232, 0.94);
+      border: 1px solid rgba(36, 61, 50, 0.1);
       border-radius: 999px;
       min-height: 88px;
       padding: 14px 16px;
@@ -107,13 +116,13 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 12px 30px rgba(36, 61, 50, 0.06);
     }
     .stat::before {
       content: "";
       position: absolute;
       inset: 7px;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(36, 61, 50, 0.12);
       border-radius: 999px;
       pointer-events: none;
     }
@@ -122,6 +131,7 @@
       font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.03em;
+      color: var(--forest);
     }
     .stat span {
       position: relative;
@@ -130,14 +140,14 @@
       font-size: 0.74rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 700;
     }
     .maplibregl-ctrl-group {
-      border: 1px solid var(--line) !important;
+      border: 1px solid rgba(36, 61, 50, 0.12) !important;
       box-shadow: none !important;
     }
     @media (max-width: 640px) {
-      .brand img { height: 32px; }
+      .brand img { height: 30px; }
       .stat strong { font-size: 1.45rem; }
     }
   </style>
@@ -149,7 +159,7 @@
     <div class="top">
       <a class="brand" href="/">
         <img src="/loop-logo.png" alt="LOOP" />
-        <div class="tagline">Everything you need. In your loop.</div>
+        <div class="tagline">The world is closer than you think.</div>
       </a>
       <a class="home" href="/">Home</a>
     </div>
@@ -223,7 +233,6 @@
         data: { type: 'FeatureCollection', features: [] },
       });
 
-      // Heatmap: zoom xa = đốm lớn; zoom gần = chi tiết hơn.
       map.addLayer({
         id: 'photo-heat',
         type: 'heatmap',
@@ -232,34 +241,19 @@
         paint: {
           'heatmap-weight': [
             'interpolate', ['linear'], ['get', 'count'],
-            1, 0.15,
-            10, 0.45,
-            50, 0.8,
-            200, 1,
+            1, 0.15, 10, 0.45, 50, 0.8, 200, 1,
           ],
           'heatmap-intensity': [
             'interpolate', ['linear'], ['zoom'],
-            0, 0.55,
-            3, 0.85,
-            6, 1.15,
-            10, 1.55,
-            13, 2.1,
+            0, 0.55, 3, 0.85, 6, 1.15, 10, 1.55, 13, 2.1,
           ],
           'heatmap-radius': [
             'interpolate', ['linear'], ['zoom'],
-            0, 18,
-            2, 28,
-            5, 36,
-            8, 28,
-            11, 22,
-            13, 16,
+            0, 18, 2, 28, 5, 36, 8, 28, 11, 22, 13, 16,
           ],
           'heatmap-opacity': [
             'interpolate', ['linear'], ['zoom'],
-            0, 0.85,
-            10, 0.75,
-            13, 0.35,
-            14, 0,
+            0, 0.85, 10, 0.75, 13, 0.35, 14, 0,
           ],
           'heatmap-color': [
             'interpolate', ['linear'], ['heatmap-density'],
@@ -274,7 +268,6 @@
         },
       });
 
-      // Zoom gần: chấm đỏ theo mật độ (bổ sung heatmap).
       map.addLayer({
         id: 'photo-heat-points',
         type: 'circle',
@@ -288,18 +281,11 @@
           ],
           'circle-color': [
             'interpolate', ['linear'], ['get', 'count'],
-            1, '#fecaca',
-            5, '#f87171',
-            15, '#ef4444',
-            40, '#dc2626',
-            100, '#b91c1c',
-            200, '#7f1d1d',
+            1, '#fecaca', 5, '#f87171', 15, '#ef4444', 40, '#dc2626', 100, '#b91c1c', 200, '#7f1d1d',
           ],
           'circle-opacity': [
             'interpolate', ['linear'], ['zoom'],
-            9, 0.15,
-            11, 0.65,
-            13, 0.9,
+            9, 0.15, 11, 0.65, 13, 0.9,
           ],
           'circle-stroke-width': 1,
           'circle-stroke-color': '#ffffff',
@@ -337,7 +323,6 @@
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 
-    // Totals ngay.
     rpc('get_world_totals')
       .then((totals) => {
         const row = Array.isArray(totals) ? totals[0] : totals;
@@ -350,7 +335,6 @@
       try {
         if (map.setProjection) map.setProjection({ type: 'globe' });
       } catch (_) {}
-
       ensureHeatLayers(map);
       try {
         await loadDotsForZoom(map, map.getZoom(), { force: true });
