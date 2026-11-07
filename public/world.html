@@ -15,7 +15,6 @@
       --paper: #ffffff;
       --muted: #6b6b6b;
       --line: #e6e6e6;
-      --soft: #f4f4f4;
     }
     * { box-sizing: border-box; }
     html, body {
@@ -29,7 +28,7 @@
       position: fixed;
       inset: 0;
       z-index: 0;
-      filter: grayscale(1) contrast(1.05);
+      filter: grayscale(1) contrast(1.04);
     }
     .veil {
       position: fixed;
@@ -37,7 +36,7 @@
       z-index: 1;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.55) 28%, rgba(255,255,255,0.18) 52%, rgba(255,255,255,0.72) 100%);
+        linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.28) 26%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0.55) 100%);
     }
     .ui {
       position: relative;
@@ -45,7 +44,7 @@
       min-height: 100%;
       display: flex;
       flex-direction: column;
-      padding: 22px 18px 28px;
+      padding: 20px 16px 24px;
       pointer-events: none;
     }
     .top {
@@ -67,19 +66,18 @@
       gap: 6px;
     }
     .brand img {
-      height: 42px;
+      height: 40px;
       width: auto;
       display: block;
     }
     .tagline {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       letter-spacing: 0.14em;
       font-weight: 600;
       color: var(--muted);
       text-transform: uppercase;
     }
     .home {
-      pointer-events: auto;
       text-decoration: none;
       color: var(--ink);
       border: 1.5px solid var(--ink);
@@ -87,89 +85,42 @@
       padding: 9px 16px;
       font-size: 0.85rem;
       font-weight: 600;
-      background: rgba(255,255,255,0.85);
-    }
-    .panel {
-      pointer-events: auto;
-      margin: 28px auto 0;
-      max-width: 560px;
-      width: 100%;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 22px 22px 18px;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.06);
-      backdrop-filter: blur(10px);
-    }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .pill i {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--ink);
-      display: inline-block;
-    }
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(1.55rem, 4vw, 2.15rem);
-      line-height: 1.12;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.55;
-      font-weight: 450;
+      background: rgba(255,255,255,0.88);
     }
     .stats {
       pointer-events: auto;
-      max-width: 560px;
+      max-width: 420px;
       width: 100%;
-      margin: 14px auto 0;
+      margin: 18px auto 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
     .stat {
       position: relative;
       background: rgba(255,255,255,0.92);
       border: 1px solid var(--line);
       border-radius: 999px;
-      min-height: 96px;
-      padding: 16px 18px;
+      min-height: 88px;
+      padding: 14px 16px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-      overflow: hidden;
     }
     .stat::before {
       content: "";
       position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(0,0,0,0.12);
+      inset: 7px;
+      border: 1px solid rgba(0,0,0,0.1);
       border-radius: 999px;
       pointer-events: none;
     }
     .stat strong {
       position: relative;
-      font-size: 1.85rem;
+      font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.03em;
     }
@@ -177,32 +128,9 @@
       position: relative;
       margin-top: 2px;
       color: var(--muted);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 600;
-    }
-    .status {
-      pointer-events: auto;
-      max-width: 560px;
-      width: 100%;
-      margin: 12px auto 0;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-    .foot {
-      pointer-events: auto;
-      margin-top: auto;
-      padding-top: 22px;
-      max-width: 560px;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-    .foot a {
-      color: var(--ink);
       font-weight: 600;
     }
     .maplibregl-ctrl-group {
@@ -210,9 +138,8 @@
       box-shadow: none !important;
     }
     @media (max-width: 640px) {
-      .brand img { height: 34px; }
-      .panel { margin-top: 18px; }
-      .stat strong { font-size: 1.55rem; }
+      .brand img { height: 32px; }
+      .stat strong { font-size: 1.45rem; }
     }
   </style>
 </head>
@@ -228,16 +155,6 @@
       <a class="home" href="/">Home</a>
     </div>
 
-    <div class="panel">
-      <div class="pill"><i></i> In development · Live map</div>
-      <h1>Growing where people share real moments</h1>
-      <p class="sub">
-        Red dots mark places that already have photos on LOOP —
-        lighter where activity is low, deeper red where more photos gather.
-        No photo details — just a live look at how the community is expanding.
-      </p>
-    </div>
-
     <div class="stats">
       <div class="stat">
         <strong id="photoCount">—</strong>
@@ -248,15 +165,6 @@
         <span>Users</span>
       </div>
     </div>
-    <div class="status" id="status">Loading live stats…</div>
-
-    <div class="foot">
-      LOOP is actively developing.
-      Download on
-      <a href="https://apps.apple.com/vn/app/loopic/id6747373355" target="_blank" rel="noopener">App Store</a>
-      /
-      <a href="https://play.google.com/store/apps/details?id=io.getloop.app" target="_blank" rel="noopener">Google Play</a>.
-    </div>
   </div>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -264,15 +172,23 @@
     const SUPABASE_URL = 'https://dgkekwdsctscpkjotnas.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRna2Vrd2RzY3RzY3Bram90bmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NDk4OTQsImV4cCI6MjA5NTIyNTg5NH0.2pYytmmpHMpKXtSVQQ0CjQ7Lc6aWnkKJNsZi_KYJ7RU';
 
-    const statusEl = document.getElementById('status');
     const photoEl = document.getElementById('photoCount');
     const userEl = document.getElementById('userCount');
+
+    let currentPrecision = null;
+    let loadSeq = 0;
 
     function fmt(n) {
       const x = Number(n) || 0;
       if (x >= 1_000_000) return (x / 1_000_000).toFixed(1) + 'M';
       if (x >= 1_000) return (x / 1_000).toFixed(1) + 'K';
       return String(x);
+    }
+
+    function precisionForZoom(z) {
+      if (z < 3.5) return 0;
+      if (z < 7) return 1;
+      return 2;
     }
 
     async function rpc(fn, body = {}) {
@@ -285,108 +201,171 @@
         },
         body: JSON.stringify(body),
       });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`${fn} ${res.status}: ${text}`);
-      }
+      if (!res.ok) throw new Error(`${fn} ${res.status}: ${await res.text()}`);
       return res.json();
     }
 
-    // Load stats ngay, không phụ thuộc map load.
-    (async () => {
-      try {
-        const [totals, dots] = await Promise.all([
-          rpc('get_world_totals'),
-          rpc('get_world_photo_dots', { p_precision: 1 }),
-        ]);
-        const row = Array.isArray(totals) ? totals[0] : totals;
-        photoEl.textContent = fmt(row?.photo_count);
-        userEl.textContent = fmt(row?.user_count);
+    function toFeatures(dots) {
+      return (dots || []).map((d) => ({
+        type: 'Feature',
+        properties: { count: Math.max(1, Number(d.photo_count) || 1) },
+        geometry: {
+          type: 'Point',
+          coordinates: [Number(d.lng), Number(d.lat)],
+        },
+      }));
+    }
 
-        window.__loopDots = Array.isArray(dots) ? dots : [];
-        statusEl.textContent = window.__loopDots.length
-          ? `${window.__loopDots.length} locations with photos`
-          : 'Stats loaded · map dots coming online';
-        if (window.__paintLoopDots) window.__paintLoopDots();
-      } catch (e) {
-        console.error(e);
-        statusEl.textContent = 'Could not load live stats. Re-run sql/25_world_stats.sql on Supabase.';
-      }
-    })();
+    function ensureHeatLayers(map) {
+      if (map.getSource('photo-heat')) return;
+
+      map.addSource('photo-heat', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      });
+
+      // Heatmap: zoom xa = đốm lớn; zoom gần = chi tiết hơn.
+      map.addLayer({
+        id: 'photo-heat',
+        type: 'heatmap',
+        source: 'photo-heat',
+        maxzoom: 14,
+        paint: {
+          'heatmap-weight': [
+            'interpolate', ['linear'], ['get', 'count'],
+            1, 0.15,
+            10, 0.45,
+            50, 0.8,
+            200, 1,
+          ],
+          'heatmap-intensity': [
+            'interpolate', ['linear'], ['zoom'],
+            0, 0.55,
+            3, 0.85,
+            6, 1.15,
+            10, 1.55,
+            13, 2.1,
+          ],
+          'heatmap-radius': [
+            'interpolate', ['linear'], ['zoom'],
+            0, 18,
+            2, 28,
+            5, 36,
+            8, 28,
+            11, 22,
+            13, 16,
+          ],
+          'heatmap-opacity': [
+            'interpolate', ['linear'], ['zoom'],
+            0, 0.85,
+            10, 0.75,
+            13, 0.35,
+            14, 0,
+          ],
+          'heatmap-color': [
+            'interpolate', ['linear'], ['heatmap-density'],
+            0, 'rgba(254,226,226,0)',
+            0.15, '#fecaca',
+            0.35, '#f87171',
+            0.55, '#ef4444',
+            0.75, '#dc2626',
+            0.9, '#b91c1c',
+            1, '#7f1d1d',
+          ],
+        },
+      });
+
+      // Zoom gần: chấm đỏ theo mật độ (bổ sung heatmap).
+      map.addLayer({
+        id: 'photo-heat-points',
+        type: 'circle',
+        source: 'photo-heat',
+        minzoom: 9,
+        paint: {
+          'circle-radius': [
+            'interpolate', ['linear'], ['zoom'],
+            9, ['interpolate', ['linear'], ['get', 'count'], 1, 3, 50, 6, 200, 10],
+            14, ['interpolate', ['linear'], ['get', 'count'], 1, 5, 50, 10, 200, 16],
+          ],
+          'circle-color': [
+            'interpolate', ['linear'], ['get', 'count'],
+            1, '#fecaca',
+            5, '#f87171',
+            15, '#ef4444',
+            40, '#dc2626',
+            100, '#b91c1c',
+            200, '#7f1d1d',
+          ],
+          'circle-opacity': [
+            'interpolate', ['linear'], ['zoom'],
+            9, 0.15,
+            11, 0.65,
+            13, 0.9,
+          ],
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#ffffff',
+        },
+      });
+    }
+
+    function setHeatData(map, dots) {
+      ensureHeatLayers(map);
+      map.getSource('photo-heat').setData({
+        type: 'FeatureCollection',
+        features: toFeatures(dots),
+      });
+    }
+
+    async function loadDotsForZoom(map, zoom, { force = false } = {}) {
+      const prec = precisionForZoom(zoom);
+      if (!force && prec === currentPrecision) return;
+      const seq = ++loadSeq;
+      const dots = await rpc('get_world_photo_dots', { p_precision: prec });
+      if (seq !== loadSeq) return;
+      currentPrecision = prec;
+      window.__loopDots = Array.isArray(dots) ? dots : [];
+      if (map.isStyleLoaded()) setHeatData(map, window.__loopDots);
+    }
 
     const map = new maplibregl.Map({
       container: 'map',
       style: 'https://tiles.openfreemap.org/styles/positron',
       center: [105.8, 16.5],
-      zoom: 1.7,
+      zoom: 1.8,
+      minZoom: 0.8,
+      maxZoom: 14,
       attributionControl: true,
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 
-    map.on('load', () => {
+    // Totals ngay.
+    rpc('get_world_totals')
+      .then((totals) => {
+        const row = Array.isArray(totals) ? totals[0] : totals;
+        photoEl.textContent = fmt(row?.photo_count);
+        userEl.textContent = fmt(row?.user_count);
+      })
+      .catch((e) => console.error(e));
+
+    map.on('load', async () => {
       try {
         if (map.setProjection) map.setProjection({ type: 'globe' });
       } catch (_) {}
 
-      window.__paintLoopDots = () => {
-        const dots = window.__loopDots || [];
-        const features = dots.map((d) => ({
-          type: 'Feature',
-          properties: { count: Number(d.photo_count) || 1 },
-          geometry: {
-            type: 'Point',
-            coordinates: [Number(d.lng), Number(d.lat)],
-          },
-        }));
+      ensureHeatLayers(map);
+      try {
+        await loadDotsForZoom(map, map.getZoom(), { force: true });
+      } catch (e) {
+        console.error(e);
+      }
+    });
 
-        if (map.getSource('photo-dots')) {
-          map.getSource('photo-dots').setData({ type: 'FeatureCollection', features });
-          return;
-        }
-
-        map.addSource('photo-dots', {
-          type: 'geojson',
-          data: { type: 'FeatureCollection', features },
-        });
-
-        // Ít ảnh → đỏ nhạt; nhiều ảnh → đỏ đậm.
-        const redByCount = [
-          'interpolate', ['linear'], ['get', 'count'],
-          1, '#fecaca',
-          5, '#f87171',
-          15, '#ef4444',
-          40, '#dc2626',
-          100, '#b91c1c',
-          200, '#7f1d1d',
-        ];
-
-        map.addLayer({
-          id: 'photo-dots-glow',
-          type: 'circle',
-          source: 'photo-dots',
-          paint: {
-            'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 8, 20, 16, 100, 26, 200, 34],
-            'circle-color': redByCount,
-            'circle-opacity': 0.22,
-            'circle-blur': 0.55,
-          },
-        });
-
-        map.addLayer({
-          id: 'photo-dots-core',
-          type: 'circle',
-          source: 'photo-dots',
-          paint: {
-            'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 4, 20, 7, 100, 11, 200, 14],
-            'circle-color': redByCount,
-            'circle-stroke-width': 1.4,
-            'circle-stroke-color': '#ffffff',
-            'circle-opacity': 0.95,
-          },
-        });
-      };
-
-      window.__paintLoopDots();
+    let zoomTimer = null;
+    map.on('zoomend', () => {
+      clearTimeout(zoomTimer);
+      zoomTimer = setTimeout(() => {
+        loadDotsForZoom(map, map.getZoom()).catch((e) => console.error(e));
+      }, 180);
     });
   </script>
 </body>
