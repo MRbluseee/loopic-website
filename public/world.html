@@ -232,7 +232,8 @@
       <div class="pill"><i></i> In development · Live map</div>
       <h1>Growing where people share real moments</h1>
       <p class="sub">
-        Black dots mark places that already have photos on LOOP.
+        Red dots mark places that already have photos on LOOP —
+        lighter where activity is low, deeper red where more photos gather.
         No photo details — just a live look at how the community is expanding.
       </p>
     </div>
@@ -348,14 +349,25 @@
           data: { type: 'FeatureCollection', features },
         });
 
+        // Ít ảnh → đỏ nhạt; nhiều ảnh → đỏ đậm.
+        const redByCount = [
+          'interpolate', ['linear'], ['get', 'count'],
+          1, '#fecaca',
+          5, '#f87171',
+          15, '#ef4444',
+          40, '#dc2626',
+          100, '#b91c1c',
+          200, '#7f1d1d',
+        ];
+
         map.addLayer({
           id: 'photo-dots-glow',
           type: 'circle',
           source: 'photo-dots',
           paint: {
-            'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 7, 20, 14, 80, 22],
-            'circle-color': '#000000',
-            'circle-opacity': 0.12,
+            'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 8, 20, 16, 100, 26, 200, 34],
+            'circle-color': redByCount,
+            'circle-opacity': 0.22,
             'circle-blur': 0.55,
           },
         });
@@ -365,9 +377,9 @@
           type: 'circle',
           source: 'photo-dots',
           paint: {
-            'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 3.5, 20, 6, 80, 9],
-            'circle-color': '#0a0a0a',
-            'circle-stroke-width': 1.5,
+            'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 4, 20, 7, 100, 11, 200, 14],
+            'circle-color': redByCount,
+            'circle-stroke-width': 1.4,
             'circle-stroke-color': '#ffffff',
             'circle-opacity': 0.95,
           },
