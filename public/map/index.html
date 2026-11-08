@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LOOP — World map</title>
-  <meta name="description" content="See where LOOP photos are shared worldwide." />
+  <title>loopic — World map</title>
+  <meta name="description" content="See where loopic photos are shared worldwide." />
   <link rel="icon" href="/loop-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,13 +12,10 @@
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
   <style>
     :root {
-      --ivory: #F5F1E8;
-      --forest: #243D32;
-      --terracotta: #C66B45;
-      --sand: #D6B875;
-      --sage: #DCE3D8;
-      --charcoal: #292B27;
-      --muted: #5c635c;
+      --ivory: #FAFAFA;
+      --forest: #0A0A0A;
+      --charcoal: #0A0A0A;
+      --muted: #666666;
     }
     * { box-sizing: border-box; }
     html, body {
@@ -28,126 +25,63 @@
       background: var(--ivory);
       color: var(--charcoal);
     }
-    #map {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-    }
+    #map { position: fixed; inset: 0; z-index: 0; }
     .veil {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(245,241,232,0.92) 0%, rgba(245,241,232,0.28) 28%, rgba(245,241,232,0.08) 55%, rgba(245,241,232,0.55) 100%);
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(250,250,250,0.92) 0%, rgba(250,250,250,0.28) 28%, rgba(250,250,250,0.08) 55%, rgba(250,250,250,0.55) 100%);
     }
     .ui {
-      position: relative;
-      z-index: 2;
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 20px 16px 24px;
-      pointer-events: none;
+      position: relative; z-index: 2; min-height: 100%;
+      display: flex; flex-direction: column; padding: 20px 16px 24px; pointer-events: none;
     }
     .top {
-      pointer-events: auto;
-      max-width: 980px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
+      pointer-events: auto; max-width: 980px; width: 100%; margin: 0 auto;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
     }
     .brand {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-decoration: none;
-      color: inherit;
-      gap: 6px;
+      display: flex; flex-direction: column; align-items: flex-start;
+      text-decoration: none; color: inherit; gap: 6px;
     }
-    .brand img {
-      height: 36px;
-      width: auto;
-      display: block;
-      filter: brightness(0) saturate(100%) invert(18%) sepia(18%) saturate(900%) hue-rotate(100deg) brightness(0.85);
-    }
+    .wordmark { display: inline-flex; align-items: flex-end; line-height: 1; color: var(--charcoal); }
+    .wordmark-mark { height: 32px; width: auto; margin-right: 8px; display: block; }
+    .wordmark-loop { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 1.2rem; }
+    .wordmark-ic { font-weight: 600; font-size: 0.66rem; margin: 0 0 0.1em 0.06em; opacity: 0.85; }
     .tagline {
-      font-size: 0.66rem;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
+      font-size: 0.66rem; letter-spacing: 0.12em; font-weight: 700;
+      color: var(--muted); text-transform: uppercase;
     }
     .home {
-      text-decoration: none;
-      color: var(--forest);
-      border: 1.5px solid var(--forest);
-      border-radius: 999px;
-      padding: 9px 16px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      background: rgba(245, 241, 232, 0.9);
+      text-decoration: none; color: var(--forest); border: 1.5px solid var(--forest);
+      border-radius: 999px; padding: 9px 16px; font-size: 0.85rem; font-weight: 700;
+      background: rgba(250, 250, 250, 0.9);
     }
-    .home:hover {
-      background: var(--forest);
-      color: var(--ivory);
-    }
+    .home:hover { background: var(--forest); color: var(--ivory); }
     .stats {
-      pointer-events: auto;
-      max-width: 420px;
-      width: 100%;
-      margin: 18px auto 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      pointer-events: auto; max-width: 420px; width: 100%; margin: 18px auto 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
     }
     .stat {
-      position: relative;
-      background: rgba(245, 241, 232, 0.94);
-      border: 1px solid rgba(36, 61, 50, 0.1);
-      border-radius: 999px;
-      min-height: 88px;
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      box-shadow: 0 12px 30px rgba(36, 61, 50, 0.06);
+      position: relative; background: rgba(250, 250, 250, 0.94);
+      border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 999px; min-height: 88px;
+      padding: 14px 16px; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
     }
     .stat::before {
-      content: "";
-      position: absolute;
-      inset: 7px;
-      border: 1px solid rgba(36, 61, 50, 0.12);
-      border-radius: 999px;
-      pointer-events: none;
+      content: ""; position: absolute; inset: 7px; border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 999px; pointer-events: none;
     }
     .stat strong {
-      position: relative;
-      font-size: 1.75rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--forest);
+      position: relative; font-size: 1.75rem; font-weight: 800;
+      letter-spacing: -0.03em; color: var(--forest);
     }
     .stat span {
-      position: relative;
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 0.74rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
+      position: relative; margin-top: 2px; color: var(--muted); font-size: 0.74rem;
+      letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700;
     }
-    .maplibregl-ctrl-group {
-      border: 1px solid rgba(36, 61, 50, 0.12) !important;
-      box-shadow: none !important;
-    }
+    .maplibregl-ctrl-group { border: 1px solid rgba(0, 0, 0, 0.12) !important; box-shadow: none !important; }
     @media (max-width: 640px) {
-      .brand img { height: 30px; }
+      .wordmark-mark { height: 26px; }
+      .wordmark-loop { font-size: 1.05rem; }
       .stat strong { font-size: 1.45rem; }
     }
   </style>
@@ -157,9 +91,12 @@
   <div class="veil"></div>
   <div class="ui">
     <div class="top">
-      <a class="brand" href="/">
-        <img src="/loop-logo.png" alt="LOOP" />
-        <div class="tagline">The world is closer than you think.</div>
+      <a class="brand" href="/" aria-label="loopic">
+        <span class="wordmark">
+          <img class="wordmark-mark" src="/loop-logo.png" alt="" />
+          <span class="wordmark-loop">LOOP</span><span class="wordmark-ic">ic</span>
+        </span>
+        <div class="tagline">Everything you need. In your loop.</div>
       </a>
       <a class="home" href="/">Home</a>
     </div>
@@ -176,7 +113,7 @@
     </div>
   </div>
 
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script>
     const SUPABASE_URL = 'https://dgkekwdsctscpkjotnas.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRna2Vrd2RzY3RzY3Bram90bmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NDk4OTQsImV4cCI6MjA5NTIyNTg5NH0.2pYytmmpHMpKXtSVQQ0CjQ7Lc6aWnkKJNsZi_KYJ7RU';
