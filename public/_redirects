@@ -1,15 +1,2 @@
-# Cloudflare Pages redirects
-/world    /world.html   200
+# Cloudflare Pages — avoid html↔pretty-url redirect loops
 /app-ads.txt    /app-ads.txt   200
-
-
-
-
-
-
-
-
-
-
-
-
