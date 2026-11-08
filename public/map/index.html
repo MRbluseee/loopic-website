@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOOP — World map</title>
+  <meta name="description" content="See where LOOP photos are shared worldwide." />
+  <link rel="icon" href="/loop-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <style>
+    :root {
+      --ivory: #F5F1E8;
+      --forest: #243D32;
+      --terracotta: #C66B45;
+      --sand: #D6B875;
+      --sage: #DCE3D8;
+      --charcoal: #292B27;
+      --muted: #5c635c;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: Manrope, system-ui, sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+    }
+    #map {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+    .veil {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(245,241,232,0.92) 0%, rgba(245,241,232,0.28) 28%, rgba(245,241,232,0.08) 55%, rgba(245,241,232,0.55) 100%);
+    }
+    .ui {
+      position: relative;
+      z-index: 2;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 16px 24px;
+      pointer-events: none;
+    }
+    .top {
+      pointer-events: auto;
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-decoration: none;
+      color: inherit;
+      gap: 6px;
+    }
+    .brand img {
+      height: 36px;
+      width: auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(18%) sepia(18%) saturate(900%) hue-rotate(100deg) brightness(0.85);
+    }
+    .tagline {
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .home {
+      text-decoration: none;
+      color: var(--forest);
+      border: 1.5px solid var(--forest);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: rgba(245, 241, 232, 0.9);
+    }
+    .home:hover {
+      background: var(--forest);
+      color: var(--ivory);
+    }
+    .stats {
+      pointer-events: auto;
+      max-width: 420px;
+      width: 100%;
+      margin: 18px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .stat {
+      position: relative;
+      background: rgba(245, 241, 232, 0.94);
+      border: 1px solid rgba(36, 61, 50, 0.1);
+      border-radius: 999px;
+      min-height: 88px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(36, 61, 50, 0.06);
+    }
+    .stat::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(36, 61, 50, 0.12);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .stat strong {
+      position: relative;
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--forest);
+    }
+    .stat span {
+      position: relative;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .maplibregl-ctrl-group {
+      border: 1px solid rgba(36, 61, 50, 0.12) !important;
+      box-shadow: none !important;
+    }
+    @media (max-width: 640px) {
+      .brand img { height: 30px; }
+      .stat strong { font-size: 1.45rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="veil"></div>
+  <div class="ui">
+    <div class="top">
+      <a class="brand" href="/">
+        <img src="/loop-logo.png" alt="LOOP" />
+        <div class="tagline">The world is closer than you think.</div>
+      </a>
+      <a class="home" href="/">Home</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="photoCount">—</strong>
+        <span>Photos</span>
+      </div>
+      <div class="stat">
+        <strong id="userCount">—</strong>
+        <span>Users</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    const SUPABASE_URL = 'https://dgkekwdsctscpkjotnas.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRna2Vrd2RzY3RzY3Bram90bmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NDk4OTQsImV4cCI6MjA5NTIyNTg5NH0.2pYytmmpHMpKXtSVQQ0CjQ7Lc6aWnkKJNsZi_KYJ7RU';
+
+    const photoEl = document.getElementById('photoCount');
+    const userEl = document.getElementById('userCount');
+
+    let currentPrecision = null;
+    let loadSeq = 0;
+
+    function fmt(n) {
+      const x = Number(n) || 0;
+      if (x >= 1_000_000) return (x / 1_000_000).toFixed(1) + 'M';
+      if (x >= 1_000) return (x / 1_000).toFixed(1) + 'K';
+      return String(x);
+    }
+
+    function precisionForZoom(z) {
+      if (z < 3.5) return 0;
+      if (z < 7) return 1;
+      return 2;
+    }
+
+    async function rpc(fn, body = {}) {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) throw new Error(`${fn} ${res.status}: ${await res.text()}`);
+      return res.json();
+    }
+
+    function toFeatures(dots) {
+      return (dots || []).map((d) => ({
+        type: 'Feature',
+        properties: { count: Math.max(1, Number(d.photo_count) || 1) },
+        geometry: {
+          type: 'Point',
+          coordinates: [Number(d.lng), Number(d.lat)],
+        },
+      }));
+    }
+
+    function ensureHeatLayers(map) {
+      if (map.getSource('photo-heat')) return;
+
+      map.addSource('photo-heat', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      });
+
+      map.addLayer({
+        id: 'photo-heat',
+        type: 'heatmap',
+        source: 'photo-heat',
+        maxzoom: 14,
+        paint: {
+          'heatmap-weight': [
+            'interpolate', ['linear'], ['get', 'count'],
+            1, 0.15, 10, 0.45, 50, 0.8, 200, 1,
+          ],
+          'heatmap-intensity': [
+            'interpolate', ['linear'], ['zoom'],
+            0, 0.55, 3, 0.85, 6, 1.15, 10, 1.55, 13, 2.1,
+          ],
+          'heatmap-radius': [
+            'interpolate', ['linear'], ['zoom'],
+            0, 18, 2, 28, 5, 36, 8, 28, 11, 22, 13, 16,
+          ],
+          'heatmap-opacity': [
+            'interpolate', ['linear'], ['zoom'],
+            0, 0.85, 10, 0.75, 13, 0.35, 14, 0,
+          ],
+          'heatmap-color': [
+            'interpolate', ['linear'], ['heatmap-density'],
+            0, 'rgba(254,226,226,0)',
+            0.15, '#fecaca',
+            0.35, '#f87171',
+            0.55, '#ef4444',
+            0.75, '#dc2626',
+            0.9, '#b91c1c',
+            1, '#7f1d1d',
+          ],
+        },
+      });
+
+      map.addLayer({
+        id: 'photo-heat-points',
+        type: 'circle',
+        source: 'photo-heat',
+        minzoom: 9,
+        paint: {
+          'circle-radius': [
+            'interpolate', ['linear'], ['zoom'],
+            9, ['interpolate', ['linear'], ['get', 'count'], 1, 3, 50, 6, 200, 10],
+            14, ['interpolate', ['linear'], ['get', 'count'], 1, 5, 50, 10, 200, 16],
+          ],
+          'circle-color': [
+            'interpolate', ['linear'], ['get', 'count'],
+            1, '#fecaca', 5, '#f87171', 15, '#ef4444', 40, '#dc2626', 100, '#b91c1c', 200, '#7f1d1d',
+          ],
+          'circle-opacity': [
+            'interpolate', ['linear'], ['zoom'],
+            9, 0.15, 11, 0.65, 13, 0.9,
+          ],
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#ffffff',
+        },
+      });
+    }
+
+    function setHeatData(map, dots) {
+      ensureHeatLayers(map);
+      map.getSource('photo-heat').setData({
+        type: 'FeatureCollection',
+        features: toFeatures(dots),
+      });
+    }
+
+    async function loadDotsForZoom(map, zoom, { force = false } = {}) {
+      const prec = precisionForZoom(zoom);
+      if (!force && prec === currentPrecision) return;
+      const seq = ++loadSeq;
+      const dots = await rpc('get_world_photo_dots', { p_precision: prec });
+      if (seq !== loadSeq) return;
+      currentPrecision = prec;
+      window.__loopDots = Array.isArray(dots) ? dots : [];
+      if (map.isStyleLoaded()) setHeatData(map, window.__loopDots);
+    }
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://tiles.openfreemap.org/styles/positron',
+      center: [105.8, 16.5],
+      zoom: 1.8,
+      minZoom: 0.8,
+      maxZoom: 14,
+      attributionControl: true,
+    });
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+
+    rpc('get_world_totals')
+      .then((totals) => {
+        const row = Array.isArray(totals) ? totals[0] : totals;
+        photoEl.textContent = fmt(row?.photo_count);
+        userEl.textContent = fmt(row?.user_count);
+      })
+      .catch((e) => console.error(e));
+
+    map.on('load', async () => {
+      try {
+        if (map.setProjection) map.setProjection({ type: 'globe' });
+      } catch (_) {}
+      ensureHeatLayers(map);
+      try {
+        await loadDotsForZoom(map, map.getZoom(), { force: true });
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    let zoomTimer = null;
+    map.on('zoomend', () => {
+      clearTimeout(zoomTimer);
+      zoomTimer = setTimeout(() => {
+        loadDotsForZoom(map, map.getZoom()).catch((e) => console.error(e));
+      }, 180);
+    });
+  </script>
+</body>
+</html>
