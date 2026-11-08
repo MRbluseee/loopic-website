@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-label="LOOP">
+  <g fill="#0A0A0A">
+    <text x="48" y="148" font-family="Arial Black, Helvetica Neue, Arial, sans-serif" font-size="128" font-weight="800" letter-spacing="10">LOOP</text>
+  </g>
+  <g fill="none" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round">
+    <path d="M248 42 A78 78 0 0 1 404 42"/>
+    <path d="M404 158 A78 78 0 0 1 248 158"/>
+  </g>
+  <circle cx="388" cy="48" r="9" fill="#0A0A0A"/>
+  <circle cx="264" cy="152" r="9" fill="#0A0A0A"/>
+</svg>
